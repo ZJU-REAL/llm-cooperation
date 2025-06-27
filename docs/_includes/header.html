@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{ page.title | escape }} - {{ site.title | escape }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+  
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }}" href="{{ '/feed.xml' | relative_url }}">
+  
+  {% if site.google_analytics %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+  {% endif %}
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="{{ '/' | relative_url }}">
+          <h1>{{ site.title | escape }}</h1>
+        </a>
+        
+        <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.548c0,0.819-0.665,1.484-1.484,1.484 H1.484C0.665,15.031,0,14.366,0,13.548l0,0c0-0.819,0.665-1.484,1.484-1.484h15.032C17.335,12.064,18,12.729,18,13.548L18,13.548z"/>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            <!-- Navigation links -->
+            <a class="page-link" href="{{ '/' | relative_url }}">Home</a>
+            <a class="page-link" href="{{ '/getting-started' | relative_url }}">Getting Started</a>
+            <a class="page-link" href="{{ '/api-reference' | relative_url }}">API Reference</a>
+            <a class="page-link" href="{{ '/examples' | relative_url }}">Examples</a>
+            
+            <!-- Language switcher -->
+            <div class="language-switcher">
+              {% if page.lang == 'zh' or page.url contains '/zh/' %}
+                <a href="{{ page.url | replace: '/zh/', '/' | replace: '/zh', '/' }}" class="lang-link">🇺🇸 EN</a>
+                <span class="current-lang">🇨🇳 中文</span>
+              {% else %}
+                <span class="current-lang">🇺🇸 English</span>
+                <a href="{{ '/zh' | append: page.url }}" class="lang-link">🇨🇳 中文</a>
+              {% endif %}
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <h3>{{ site.project.name }}</h3>
+            <p>{{ site.description }}</p>
+          </div>
+          
+          <div class="footer-col footer-col-2">
+            <h4>Links</h4>
+            <ul class="footer-links">
+              <li><a href="{{ site.project.github_url }}">GitHub Repository</a></li>
+              <li><a href="{{ site.project.github_url }}/issues">Report Issues</a></li>
+              <li><a href="{{ site.project.github_url }}/discussions">Discussions</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-col footer-col-3">
+            <h4>Documentation</h4>
+            <ul class="footer-links">
+              <li><a href="{{ '/getting-started' | relative_url }}">Getting Started</a></li>
+              <li><a href="{{ '/api-reference' | relative_url }}">API Reference</a></li>
+              <li><a href="{{ '/examples' | relative_url }}">Examples</a></li>
+              <li><a href="{{ '/zh/' | relative_url }}">中文文档</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="footer-bottom">
+          <p>&copy; {{ 'now' | date: "%Y" }} ZJU-REAL. Licensed under MIT License.</p>
+          <p>Version {{ site.project.version }} | <a href="{{ site.project.documentation_url }}">Documentation</a></p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

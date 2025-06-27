@@ -1,0 +1,54 @@
+# Core OpenAI API and ML dependencies
+openai>=1.12.0
+# Optional: vLLM for local deployment
+# vllm>=0.6.0
+# torch>=2.0.0
+# transformers>=4.36.0
+# tokenizers>=0.15.0
+# accelerate>=0.25.0
+
+# FastAPI and web server
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+
+# Async and HTTP
+aiohttp>=3.9.0
+httpx>=0.26.0
+asyncio-mqtt>=0.13.0
+
+# Model Control Protocol
+mcp>=1.0.0
+mcp-server-fastmcp>=0.5.0
+
+# OpenAI client for API compatibility
+openai>=1.6.0
+
+# System monitoring and metrics
+psutil>=5.9.0
+GPUtil>=1.4.0
+prometheus-client>=0.19.0
+
+# Data processing
+numpy>=1.24.0
+pandas>=2.1.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+pyyaml>=6.0
+
+# Logging and utilities
+structlog>=23.2.0
+click>=8.1.0
+rich>=13.7.0
+
+# Testing (optional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+httpx>=0.26.0
+
+# Development tools (optional)
+black>=23.12.0
+isort>=5.13.0
+flake8>=6.1.0
+mypy>=1.8.0

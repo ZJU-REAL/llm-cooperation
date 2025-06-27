@@ -1,0 +1,35 @@
+# Include essential files
+include README.md
+include LICENSE
+include requirements.txt
+include pyproject.toml
+include MANIFEST.in
+
+# Include documentation
+recursive-include docs *
+recursive-include examples *
+
+# Include configuration templates
+recursive-include llm_cooperation/config *.json *.yaml
+recursive-include llm_cooperation/templates *
+recursive-include llm_cooperation/static *
+
+# Include tests
+recursive-include tests *
+
+# Exclude development files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .pytest_cache
+global-exclude .mypy_cache
+global-exclude .coverage
+global-exclude *.egg-info
+
+# Exclude temporary files
+global-exclude *.tmp
+global-exclude *.log
+global-exclude .env
+global-exclude API_Key_*

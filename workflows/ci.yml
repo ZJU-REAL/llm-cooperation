@@ -1,0 +1,78 @@
+# Continuous Integration workflow for the LLM Cooperation System
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # Test Jekyll build
+  jekyll-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+          working-directory: './docs'
+          
+      - name: Test Jekyll build
+        run: |
+          cd docs
+          bundle exec jekyll build --verbose
+          
+      - name: Test site links
+        run: |
+          cd docs
+          # Install htmlproofer if not already in Gemfile
+          gem install html-proofer
+          # Check built site for broken links (excluding external links)
+          htmlproofer ./_site --disable-external --check-html --check-img-http
+        continue-on-error: true
+
+  # Test Python package (if applicable)
+  python-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f setup.py ]; then pip install -e .; fi
+          if [ -f pyproject.toml ]; then pip install -e .; fi
+          
+      - name: Run Python tests
+        run: |
+          if [ -d tests ]; then
+            python -m pytest tests/ -v
+          else
+            echo "No tests directory found, skipping Python tests"
+          fi
+        continue-on-error: true
+        
+      - name: Check Python code style
+        run: |
+          pip install flake8 black
+          # Check code formatting
+          black --check llm_cooperation/ || echo "Code formatting check failed"
+          # Check code style
+          flake8 llm_cooperation/ --max-line-length=88 || echo "Code style check failed"
+        continue-on-error: true

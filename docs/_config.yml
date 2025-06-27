@@ -1,0 +1,42 @@
+# GitHub Pages Configuration for LLM Cooperation System
+title: LLM Cooperation System
+description: Intelligent multi-model routing and cooperation system for enterprise AI applications
+
+# GitHub Pages settings
+baseurl: "/llm-cooperation"
+url: "https://zju-real.github.io"
+
+# Build settings (GitHub Pages defaults)
+markdown: kramdown
+highlighter: rouge
+sass:
+  style: compressed
+
+# GitHub Pages supported plugins only
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-relative-links
+
+# Jekyll processing
+relative_links:
+  enabled: true
+  collections: false
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+
+# SEO and metadata
+author: ZJU-REAL
+github_username: ZJU-REAL
+
+# Repository info
+repository: ZJU-REAL/llm-cooperation
+
+# Language support
+lang: en
